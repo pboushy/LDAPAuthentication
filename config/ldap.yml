@@ -1,0 +1,49 @@
+## Authorizations
+# Uncomment out the merging for each environment that you'd like to include.
+# You can also just copy and paste the tree (do not include the "authorizations") to each
+# environment if you need something different per enviornment.
+authorizations: &AUTHORIZATIONS
+  group_base: cn=groups,dc=appdev1,dc=ischoolcampus,dc=com
+  ## Requires config.ldap_check_group_membership in devise.rb be true
+  # Can have multiple values, must match all to be authorized
+  required_groups:
+    # If only a group name is given, membership will be checked against "uniqueMember"
+    # If an array is given, the first element will be the attribute to check against, the second the group name
+    - ["memberUid", "cn=staff,cn=groups,dc=appdev1,dc=ischoolcampus,dc=com"]
+  ## Requires config.ldap_check_attributes in devise.rb to be true
+  ## Can have multiple attributes and values, must match all to be authorized
+  require_attribute:
+    objectClass: inetOrgPerson
+    authorizationRole: postsAdmin
+
+## Environment
+
+development:
+  host: appdev1.ischoolcampus.com
+  port: 389
+  attribute: mail
+  base: cn=Users,dc=appdev1,dc=ischoolcampus,dc=com
+  admin_user: uid=diradmin,cn=users,dc=appdev1,dc=ischoolcampus,dc=com
+  admin_password: i5sch00l
+  ssl: false
+  # <<: *AUTHORIZATIONS
+
+test:
+  host: appdev1.ischoolcampus.com
+  port: 389
+  attribute: uid
+  base: cn=users,dc=isc,dc=ischoolcampus,dc=com
+  admin_user: uid=diradmin,cn=users,dc=isc,dc=ischoolcampus,dc=com
+  admin_password: 
+  ssl: simple_tls
+  # <<: *AUTHORIZATIONS
+
+production:
+  host: appdev1.ischoolcampus.com
+  port: 389
+  attribute: uid
+  base: cn=users,dc=isc,dc=ischoolcampus,dc=com
+  admin_user: uid=diradmin,cn=users,dc=isc,dc=ischoolcampus,dc=com
+  admin_password: 
+  ssl: start_tls
+  # <<: *AUTHORIZATIONS

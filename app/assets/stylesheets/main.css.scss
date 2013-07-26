@@ -1,0 +1,49 @@
+/* Main CSS - Site-wide CSS */
+$sidebar_width: 200px;
+$padding_from_sides: 10px;
+$sidebar_border_right: 2px;
+/*
+selector {
+	position:;
+	top:;
+	left:;
+
+	float:;
+
+	height:;
+	width:;
+	
+	margin:; (top, right, bottom, left)
+	
+	padding:; (top, right, bottom, left)
+	
+	border:; (top, right, bottom, left)
+
+	display:;
+	overflow:;
+
+	background:;
+	
+	font:;
+	line-height:;
+	color:;
+
+}
+*/
+
+#sidebar {
+	float: left;
+	
+	height: 100%;
+	width: $sidebar_width;
+
+	/*padding-top: $breadcrumb_container_height + $padding_from_sides + 3px;*/
+	padding-left: $padding_from_sides;
+
+	border-right: solid $sidebar_border_right gray;
+}
+#main_content {
+	height: 100%;
+	
+	padding-left: $sidebar_width + $padding_from_sides + $sidebar_border_right + 10px;
+}
